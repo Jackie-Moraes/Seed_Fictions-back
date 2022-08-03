@@ -56,7 +56,7 @@ model categories {
 
 model subCategories {
   id         Int        @id @default(autoincrement())
-  name       String     @unique
+  name       String
   category   categories @relation(fields: [categoryId], references: [id])
   categoryId Int
 }
