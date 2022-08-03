@@ -4,6 +4,9 @@
     "type": "module",
     "description": "",
     "main": "index.js",
+    "prisma": {
+        "seed": "ts-node prisma/seed.ts"
+    },
     "scripts": {
         "dev": "nodemon src/server.ts",
         "test": "cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --coverage",
