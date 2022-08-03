@@ -1,0 +1,152 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
+  password     String
+  pictureURL   String?
+  createdAt    DateTime       @default(now())
+  sessions     sessions[]
+  comments     comments[]
+  storiesUsers storiesUsers[]
+}
+
+model sessions {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  user      users    @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+}
+
+model tags {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  storiesTags storiesTags[]
+}
+
+model warnings {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  storiesWarnings storiesWarnings[]
+}
+
+model genres {
+  id            Int             @id @default(autoincrement())
+  name          String          @unique
+  storiesGenres storiesGenres[]
+}
+
+model categories {
+  id                Int                 @id @default(autoincrement())
+  name              String              @unique
+  subcategories     subCategories[]
+  storiesCategories storiesCategories[]
+}
+
+model subCategories {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  category   categories @relation(fields: [categoryId], references: [id])
+  categoryId Int
+}
+
+model languages {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  stories stories[]
+}
+
+model stories {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  description       String
+  views             Int                 @default(0)
+  isFinished        Boolean             @default(false)
+  bannerURL         String?
+  language          languages           @relation(fields: [languageId], references: [id])
+  languageId        Int
+  createdAt         DateTime            @default(now())
+  chapters          chapters[]
+  storiesTags       storiesTags[]
+  storiesWarnings   storiesWarnings[]
+  storiesGenres     storiesGenres[]
+  storiesUsers      storiesUsers[]
+  storiesCategories storiesCategories[]
+}
+
+model chapters {
+  id            Int        @id @default(autoincrement())
+  name          String
+  content       String
+  number        Int
+  startingNotes String?
+  endingNotes   String?
+  story         stories    @relation(fields: [storyId], references: [id])
+  storyId       Int
+  createdAt     DateTime   @default(now())
+  comments      comments[]
+
+  @@unique([name, storyId])
+  @@unique([number, storyId])
+}
+
+model comments {
+  id        Int      @id @default(autoincrement())
+  content   String
+  user      users    @relation(fields: [userId], references: [id])
+  userId    Int
+  chapter   chapters @relation(fields: [chapterId], references: [id])
+  chapterId Int
+  createdAt DateTime @default(now())
+}
+
+model storiesTags {
+  id      Int     @id @default(autoincrement())
+  story   stories @relation(fields: [storyId], references: [id])
+  storyId Int
+  tag     tags    @relation(fields: [tagId], references: [id])
+  tagId   Int
+}
+
+model storiesWarnings {
+  id        Int      @id @default(autoincrement())
+  story     stories  @relation(fields: [storyId], references: [id])
+  storyId   Int
+  warning   warnings @relation(fields: [warningId], references: [id])
+  warningId Int
+}
+
+model storiesGenres {
+  id      Int     @id @default(autoincrement())
+  story   stories @relation(fields: [storyId], references: [id])
+  storyId Int
+  genre   genres  @relation(fields: [genreId], references: [id])
+  genreId Int
+}
+
+model storiesUsers {
+  id      Int     @id @default(autoincrement())
+  story   stories @relation(fields: [storyId], references: [id])
+  storyId Int
+  user    users   @relation(fields: [userId], references: [id])
+  userId  Int
+}
+
+model storiesCategories {
+  id         Int        @id @default(autoincrement())
+  story      stories    @relation(fields: [storyId], references: [id])
+  storyId    Int
+  category   categories @relation(fields: [categoryId], references: [id])
+  categoryId Int
+}
