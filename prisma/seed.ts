@@ -5,7 +5,7 @@ async function main() {
     if (exists) return ""
 
     await client.languages.createMany({
-        data: [{ name: "English" }, { name: "Português" }],
+        data: [{ name: "Inglês" }, { name: "Português" }],
     })
 
     await client.categories.createMany({
