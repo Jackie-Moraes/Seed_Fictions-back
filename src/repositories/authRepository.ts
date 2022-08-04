@@ -36,4 +36,13 @@ export const authRepository = {
             },
         })
     },
+
+    async checkTokenOwnership(name: string) {
+        const exists = await client.sessions.findFirst({
+            where: {
+                name,
+            },
+        })
+        return exists
+    },
 }

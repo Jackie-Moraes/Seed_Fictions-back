@@ -1,11 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 
-export default async function handleErrors(
-    error,
-    req: Request,
-    res: Response,
-    next: NextFunction
-) {
+export default async function handleErrors(error, req: Request, res: Response) {
     // Schema Errors
     if (error.type === "validationError") {
         return res.status(422).send(error.message)
@@ -24,6 +19,11 @@ export default async function handleErrors(
     // Sign In Errors
     if (error.type === "wrongAuthInfo") {
         return res.status(422).send(error.message)
+    }
+
+    // Unauthorized Errors
+    if (error.type === "unauthorized") {
+        return res.status(401).send(error.message)
     }
     return res.sendStatus(500)
 }
