@@ -7,6 +7,7 @@ export async function createAccount(body: createUser) {
     }
 
     const insertUser = await authRepository.userSignUp(
+        body.name,
         body.email,
         body.password,
         body.pictureURL

@@ -13,6 +13,7 @@ export const authRepository = {
     },
 
     async userSignUp(
+        name: string,
         email: string,
         password: string,
         pictureURL: string | null
@@ -21,6 +22,7 @@ export const authRepository = {
 
         await client.users.create({
             data: {
+                name,
                 email,
                 password: passwordHash,
                 pictureURL,

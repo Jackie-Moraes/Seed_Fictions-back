@@ -6,7 +6,7 @@ import { checkEmail } from "../utils/checkEmail.js"
 import { validatePassword } from "../utils/validatePassword.js"
 import { createAndSendToken } from "../utils/createAndSendToken.js"
 
-export type userData = Omit<users, "id" | "createdAt" | "pictureURL">
+export type userData = Omit<users, "id" | "createdAt" | "pictureURL" | "name">
 export type createUser = Omit<users, "id" | "createdAt">
 
 export const authService = {
