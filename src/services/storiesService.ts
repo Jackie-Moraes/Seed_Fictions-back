@@ -22,4 +22,12 @@ export const storiesService = {
         const stories = await storiesRepository.getRecentStories(page)
         return stories
     },
+
+    async getStoriesByName(searchName: string, page: number) {
+        const stories = await storiesRepository.getFilteredStories(
+            searchName,
+            page
+        )
+        return stories
+    },
 }

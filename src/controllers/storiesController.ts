@@ -18,7 +18,18 @@ export const storiesController = {
         }
 
         const stories = await storiesService.getRecentStories(page)
+        return res.status(200).send(stories)
+    },
 
+    async getStoriesByName(req: Request, res: Response) {
+        const { searchName } = req.params
+        let page = parseInt(req.query.page as string)
+
+        if (!page) {
+            page = 1
+        }
+
+        const stories = await storiesService.getStoriesByName(searchName, page)
         return res.status(200).send(stories)
     },
 }

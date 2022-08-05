@@ -33,4 +33,22 @@ export const storiesRepository = {
         })
         return stories
     },
+
+    async getFilteredStories(searchName: string, page: number) {
+        const skipAmount = (page - 1) * 10
+
+        const stories = await client.stories.findMany({
+            where: { name: { contains: searchName } },
+            orderBy: {
+                _relevance: {
+                    fields: ["name"],
+                    search: searchName,
+                    sort: "asc",
+                },
+            },
+            skip: skipAmount,
+            take: 10,
+        })
+        return stories
+    },
 }
