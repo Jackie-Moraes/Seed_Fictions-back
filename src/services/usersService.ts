@@ -10,4 +10,9 @@ export const usersService = {
         await checkIfSameUser(givenId, userId)
         await usersRepository.updateProfilePicture(userId, pictureURL)
     },
+
+    async getUsers(searchName: string, page: number) {
+        const users = await usersRepository.getUsers(searchName, page)
+        return users
+    },
 }

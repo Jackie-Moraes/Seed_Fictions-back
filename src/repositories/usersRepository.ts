@@ -7,4 +7,16 @@ export const usersRepository = {
             data: { pictureURL },
         })
     },
+
+    async getUsers(searchName: string, page: number) {
+        const skipAmount = (page - 1) * 10
+
+        const users = await client.users.findMany({
+            where: { name: { contains: searchName } },
+            orderBy: { name: "asc" },
+            skip: skipAmount,
+            take: 10,
+        })
+        return users
+    },
 }

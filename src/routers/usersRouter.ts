@@ -14,6 +14,6 @@ usersRouter.put(
     validateToken,
     usersController.updatePicture
 )
-// To Do - Get All Users && Get User by filtered name
+usersRouter.get("/users/:searchName", usersController.getUsers)
 
 export default usersRouter
