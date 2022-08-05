@@ -14,5 +14,9 @@ commentsRouter.post(
     validateToken,
     commentsController.createNewComment
 )
+commentsRouter.get(
+    "/comments/:chapterId",
+    commentsController.getChapterComments
+)
 
 export default commentsRouter

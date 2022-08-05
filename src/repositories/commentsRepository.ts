@@ -6,4 +6,13 @@ export const commentsRepository = {
             data: { content: comment, userId, chapterId },
         })
     },
+
+    async getComments(chapterId: number) {
+        const comments = await client.comments.findMany({
+            where: { chapterId },
+            include: { user: true },
+            orderBy: { createdAt: "desc" },
+        })
+        return comments
+    },
 }

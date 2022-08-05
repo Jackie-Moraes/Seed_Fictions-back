@@ -11,4 +11,11 @@ export const commentsController = {
         await commentsService.insertComment(comment, userId, chapterId)
         return res.sendStatus(201)
     },
+
+    async getChapterComments(req: Request, res: Response) {
+        const chapterId = parseInt(req.params.chapterId)
+
+        const comments = await commentsService.getComments(chapterId)
+        return res.status(200).send(comments)
+    },
 }
