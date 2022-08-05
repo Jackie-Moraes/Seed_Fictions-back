@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
-import { storiesService } from "../services/storiesService"
+
+import { storiesService } from "../services/storiesService.js"
 
 export const storiesController = {
     async createNewStory(req: Request, res: Response) {

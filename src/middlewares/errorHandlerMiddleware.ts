@@ -30,5 +30,11 @@ export default async function handleErrors(
     if (error.type === "unauthorized") {
         return res.status(401).send(error.message)
     }
+
+    // Duplicate Errors
+    if (error.type === "duplicate") {
+        return res.status(409).send(error.message)
+    }
+
     return res.sendStatus(500)
 }

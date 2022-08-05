@@ -90,7 +90,6 @@ model chapters {
   id            Int        @id @default(autoincrement())
   name          String
   content       String
-  number        Int
   startingNotes String?
   endingNotes   String?
   story         stories    @relation(fields: [storyId], references: [id])
@@ -99,7 +98,6 @@ model chapters {
   comments      comments[]
 
   @@unique([name, storyId])
-  @@unique([number, storyId])
 }
 
 model comments {

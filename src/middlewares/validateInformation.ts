@@ -6,6 +6,7 @@ import signInSchema from "./schemas/signInSchema.js"
 import signUpSchema from "./schemas/signUpSchema.js"
 import pictureSchema from "./schemas/pictureSchema.js"
 import storySchema from "./schemas/storySchema.js"
+import chapterSchema from "./schemas/chapterSchema.js"
 
 export async function validateSignUp(
     req: Request,
@@ -52,6 +53,19 @@ export async function validateStory(
     next: NextFunction
 ) {
     const validation = storySchema.validate(req.body)
+    if (validation.error) {
+        throw { type: "validationError", message: validation.error.message }
+    }
+
+    next()
+}
+
+export async function validateChapter(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    const validation = chapterSchema.validate(req.body)
     if (validation.error) {
         throw { type: "validationError", message: validation.error.message }
     }
