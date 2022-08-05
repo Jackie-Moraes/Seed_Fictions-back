@@ -14,7 +14,11 @@ export const usersController = {
 
     async getUsers(req: Request, res: Response) {
         const { searchName } = req.params
-        const page = parseInt(req.query.page as string)
+        let page = parseInt(req.query.page as string)
+
+        if (!page) {
+            page = 1
+        }
 
         const users = await usersService.getUsers(searchName, page)
         return res.status(200).send(users)

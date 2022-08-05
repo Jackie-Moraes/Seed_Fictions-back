@@ -22,4 +22,15 @@ export const storiesRepository = {
             },
         })
     },
+
+    async getRecentStories(page: number) {
+        const skipAmount = (page - 1) * 10
+
+        const stories = await client.users.findMany({
+            orderBy: { createdAt: "desc" },
+            skip: skipAmount,
+            take: 10,
+        })
+        return stories
+    },
 }

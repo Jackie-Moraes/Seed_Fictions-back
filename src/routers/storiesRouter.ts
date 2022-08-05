@@ -14,5 +14,6 @@ storiesRouter.post(
     validateToken,
     storiesController.createNewStory
 )
+storiesRouter.get("/stories", storiesController.getRecentStories)
 
 export default storiesRouter
