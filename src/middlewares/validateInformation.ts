@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from "express"
 import jwt from "jsonwebtoken"
 
+import { authRepository } from "../repositories/authRepository.js"
 import signInSchema from "./schemas/signInSchema.js"
 import signUpSchema from "./schemas/signUpSchema.js"
 import pictureSchema from "./schemas/pictureSchema.js"
-import { authRepository } from "../repositories/authRepository.js"
+import storySchema from "./schemas/storySchema.js"
 
 export async function validateSignUp(
     req: Request,
@@ -38,6 +39,19 @@ export async function validatePicture(
     next: NextFunction
 ) {
     const validation = pictureSchema.validate(req.body)
+    if (validation.error) {
+        throw { type: "validationError", message: validation.error.message }
+    }
+
+    next()
+}
+
+export async function validateStory(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    const validation = storySchema.validate(req.body)
     if (validation.error) {
         throw { type: "validationError", message: validation.error.message }
     }
