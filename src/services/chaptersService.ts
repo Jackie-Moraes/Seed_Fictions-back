@@ -4,6 +4,8 @@ import { checkIfChapterNameIsDuplicate } from "../utils/checkIfChapterNameIsDupl
 import { checkIfStoryBelongsToUser } from "../utils/checkIfStoryBelongsToUser.js"
 import { createChapter } from "../utils/createChapter.js"
 
+import { chaptersRepository } from "../repositories/chaptersRepository.js"
+
 export type createChapter = Omit<chapters, "id" | "createdAt" | "storyId">
 
 export const chaptersService = {
@@ -18,5 +20,10 @@ export const chaptersService = {
         await checkIfStoryBelongsToUser(userId, storyId)
         await checkIfChapterNameIsDuplicate(chapter.name, storyId)
         await createChapter(chapter, storyId)
+    },
+
+    async getAllChapters(storyId: number) {
+        const chapters = await chaptersRepository.returnAllChapters(storyId)
+        return chapters
     },
 }

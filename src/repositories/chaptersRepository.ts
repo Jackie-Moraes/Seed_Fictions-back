@@ -28,4 +28,12 @@ export const chaptersRepository = {
             },
         })
     },
+
+    async returnAllChapters(storyId: number) {
+        const chapters = await client.chapters.findMany({
+            where: { storyId },
+        })
+
+        return chapters
+    },
 }
