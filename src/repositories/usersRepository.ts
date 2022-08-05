@@ -13,7 +13,13 @@ export const usersRepository = {
 
         const users = await client.users.findMany({
             where: { name: { contains: searchName } },
-            orderBy: { name: "asc" },
+            orderBy: {
+                _relevance: {
+                    fields: ["name"],
+                    search: searchName,
+                    sort: "asc",
+                },
+            },
             skip: skipAmount,
             take: 10,
         })
