@@ -15,6 +15,10 @@ storiesRouter.post(
     storiesController.createNewStory
 )
 storiesRouter.get("/stories", storiesController.getRecentStories)
-storiesRouter.get("/stories/:searchName", storiesController.getStoriesByName)
+storiesRouter.get("/stories/:storyId", storiesController.getSpecificStory)
+storiesRouter.get(
+    "/search/stories/:searchName",
+    storiesController.getStoriesByName
+)
 
 export default storiesRouter

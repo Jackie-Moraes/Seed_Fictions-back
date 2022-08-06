@@ -32,4 +32,11 @@ export const storiesController = {
         const stories = await storiesService.getStoriesByName(searchName, page)
         return res.status(200).send(stories)
     },
+
+    async getSpecificStory(req: Request, res: Response) {
+        const storyId = parseInt(req.params.storyId)
+
+        const story = await storiesService.getStoryById(storyId)
+        return res.status(200).send(story)
+    },
 }

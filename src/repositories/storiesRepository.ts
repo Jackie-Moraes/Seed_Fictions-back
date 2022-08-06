@@ -26,9 +26,20 @@ export const storiesRepository = {
     async getRecentStories(page: number) {
         const skipAmount = (page - 1) * 10
 
-        const stories = await client.users.findMany({
+        const stories = await client.stories.findMany({
             orderBy: { createdAt: "desc" },
-            include: { storiesUsers: { include: { user: true } } },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                views: true,
+                isFinished: true,
+                bannerURL: true,
+                language: { select: { name: true } },
+                storiesUsers: {
+                    select: { user: { select: { id: true, name: true } } },
+                },
+            },
             skip: skipAmount,
             take: 10,
         })
@@ -39,8 +50,19 @@ export const storiesRepository = {
         const skipAmount = (page - 1) * 10
 
         const stories = await client.stories.findMany({
-            where: { name: { contains: searchName } },
-            include: { storiesUsers: { include: { user: true } } },
+            where: { name: { contains: searchName, mode: "insensitive" } },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                views: true,
+                isFinished: true,
+                bannerURL: true,
+                language: { select: { name: true } },
+                storiesUsers: {
+                    select: { user: { select: { id: true, name: true } } },
+                },
+            },
             orderBy: {
                 _relevance: {
                     fields: ["name"],
@@ -52,5 +74,25 @@ export const storiesRepository = {
             take: 10,
         })
         return stories
+    },
+
+    async getStoryById(storyId: number) {
+        const story = await client.stories.findFirst({
+            where: { id: storyId },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                views: true,
+                isFinished: true,
+                bannerURL: true,
+                language: { select: { name: true } },
+                storiesUsers: {
+                    select: { user: { select: { id: true, name: true } } },
+                },
+            },
+        })
+
+        return story
     },
 }

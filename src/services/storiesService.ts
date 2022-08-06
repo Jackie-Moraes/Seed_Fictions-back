@@ -30,4 +30,9 @@ export const storiesService = {
         )
         return stories
     },
+
+    async getStoryById(storyId: number) {
+        const story = await storiesRepository.getStoryById(storyId)
+        return story
+    },
 }
