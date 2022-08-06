@@ -28,6 +28,7 @@ export const storiesRepository = {
 
         const stories = await client.users.findMany({
             orderBy: { createdAt: "desc" },
+            include: { storiesUsers: { include: { user: true } } },
             skip: skipAmount,
             take: 10,
         })
@@ -39,6 +40,7 @@ export const storiesRepository = {
 
         const stories = await client.stories.findMany({
             where: { name: { contains: searchName } },
+            include: { storiesUsers: { include: { user: true } } },
             orderBy: {
                 _relevance: {
                     fields: ["name"],
