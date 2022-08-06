@@ -26,4 +26,11 @@ export const chaptersService = {
         const chapters = await chaptersRepository.returnAllChapters(storyId)
         return chapters
     },
+
+    async getChapterById(chapterId: number) {
+        const chapter = await chaptersRepository.returnSpecificChapter(
+            chapterId
+        )
+        return chapter
+    },
 }

@@ -15,5 +15,6 @@ chaptersRouter.post(
     chaptersController.createNewChapter
 )
 chaptersRouter.get("/chapters/:storyId", chaptersController.getAllChapters)
+chaptersRouter.get("/chapter/:storyId")
 
 export default chaptersRouter

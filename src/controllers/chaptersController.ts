@@ -17,4 +17,11 @@ export const chaptersController = {
         const chapters = await chaptersService.getAllChapters(storyId)
         return res.status(200).send(chapters)
     },
+
+    async getSpecificChapter(req: Request, res: Response) {
+        const chapterId = parseInt(req.params.chapterId)
+
+        const chapter = await chaptersService.getChapterById(chapterId)
+        return res.status(200).send(chapter)
+    },
 }

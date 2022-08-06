@@ -6,7 +6,7 @@ const chapterSchema = joi.object<createChapter>({
     name: joi.string().required(),
     content: joi.string().required(),
     startingNotes: joi.string(),
-    endingNotes: joi.number(),
+    endingNotes: joi.string(),
 })
 
 export default chapterSchema

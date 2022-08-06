@@ -32,8 +32,25 @@ export const chaptersRepository = {
     async returnAllChapters(storyId: number) {
         const chapters = await client.chapters.findMany({
             where: { storyId },
+            select: { id: true, name: true, createdAt: true },
         })
 
         return chapters
+    },
+
+    async returnSpecificChapter(chapterId: number) {
+        const chapter = await client.chapters.findFirst({
+            where: { id: chapterId },
+            select: {
+                id: true,
+                name: true,
+                content: true,
+                startingNotes: true,
+                endingNotes: true,
+                comments: true,
+            },
+        })
+
+        return chapter
     },
 }
