@@ -13,6 +13,7 @@ import storiesRouter from "./routers/storiesRouter.js"
 import chaptersRouter from "./routers/chaptersRouter.js"
 import usersStoriesRouter from "./routers/usersStoriesRouter.js"
 import commentsRouter from "./routers/commentsRouter.js"
+import qualificationsRouter from "./routers/qualificationsRouter.js"
 
 const app = express()
 app.use(cors())
@@ -26,6 +27,7 @@ app.use(storiesRouter)
 app.use(chaptersRouter)
 app.use(usersStoriesRouter)
 app.use(commentsRouter)
+app.use(qualificationsRouter)
 
 // Test Router
 if (process.env.NODE_ENV === "test") {
