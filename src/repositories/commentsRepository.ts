@@ -10,7 +10,11 @@ export const commentsRepository = {
     async getComments(chapterId: number) {
         const comments = await client.comments.findMany({
             where: { chapterId },
-            include: { user: true },
+            select: {
+                content: true,
+                createdAt: true,
+                user: { select: { id: true, name: true, pictureURL: true } },
+            },
             orderBy: { createdAt: "desc" },
         })
         return comments
