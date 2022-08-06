@@ -36,6 +36,10 @@ export const storiesRepository = {
                 isFinished: true,
                 bannerURL: true,
                 language: { select: { name: true } },
+                storiesCategories: { select: { category: true } },
+                storiesGenres: { select: { genre: true } },
+                storiesTags: { select: { tag: true } },
+                storiesWarnings: { select: { warning: true } },
                 storiesUsers: {
                     select: { user: { select: { id: true, name: true } } },
                 },
@@ -59,6 +63,10 @@ export const storiesRepository = {
                 isFinished: true,
                 bannerURL: true,
                 language: { select: { name: true } },
+                storiesCategories: { select: { category: true } },
+                storiesGenres: { select: { genre: true } },
+                storiesTags: { select: { tag: true } },
+                storiesWarnings: { select: { warning: true } },
                 storiesUsers: {
                     select: { user: { select: { id: true, name: true } } },
                 },
@@ -87,6 +95,10 @@ export const storiesRepository = {
                 isFinished: true,
                 bannerURL: true,
                 language: { select: { name: true } },
+                storiesCategories: { select: { category: true } },
+                storiesGenres: { select: { genre: true } },
+                storiesTags: { select: { tag: true } },
+                storiesWarnings: { select: { warning: true } },
                 storiesUsers: {
                     select: { user: { select: { id: true, name: true } } },
                 },
