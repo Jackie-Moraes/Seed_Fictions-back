@@ -12,7 +12,8 @@ export const usersRepository = {
         const skipAmount = (page - 1) * 10
 
         const users = await client.users.findMany({
-            where: { name: { contains: searchName } },
+            where: { name: { contains: searchName, mode: "insensitive" } },
+            select: { id: true, name: true, pictureURL: true },
             orderBy: {
                 _relevance: {
                     fields: ["name"],
