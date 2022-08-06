@@ -50,17 +50,17 @@ model genres {
 }
 
 model categories {
-  id                Int                 @id @default(autoincrement())
-  name              String              @unique
-  subcategories     subCategories[]
-  storiesCategories storiesCategories[]
+  id            Int             @id @default(autoincrement())
+  name          String          @unique
+  subcategories subCategories[]
 }
 
 model subCategories {
-  id         Int        @id @default(autoincrement())
-  name       String
-  category   categories @relation(fields: [categoryId], references: [id])
-  categoryId Int
+  id                Int                 @id @default(autoincrement())
+  name              String
+  category          categories          @relation(fields: [categoryId], references: [id])
+  categoryId        Int
+  storiesCategories storiesCategories[]
 }
 
 model languages {
@@ -144,9 +144,9 @@ model storiesUsers {
 }
 
 model storiesCategories {
-  id         Int        @id @default(autoincrement())
-  story      stories    @relation(fields: [storyId], references: [id])
-  storyId    Int
-  category   categories @relation(fields: [categoryId], references: [id])
-  categoryId Int
+  id            Int           @id @default(autoincrement())
+  story         stories       @relation(fields: [storyId], references: [id])
+  storyId       Int
+  subCategory   subCategories @relation(fields: [subCategoryId], references: [id])
+  subCategoryId Int
 }

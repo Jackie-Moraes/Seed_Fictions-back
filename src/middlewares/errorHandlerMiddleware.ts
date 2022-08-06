@@ -36,5 +36,6 @@ export default async function handleErrors(
         return res.status(409).send(error.message)
     }
 
+    console.log(error)
     return res.sendStatus(500)
 }

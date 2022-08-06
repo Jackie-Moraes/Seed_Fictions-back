@@ -23,6 +23,70 @@ export const storiesRepository = {
         })
     },
 
+    async insertStoryCategories(storyId: number, categoriesIds: number[]) {
+        for (let i = 0; i < categoriesIds.length; i++) {
+            const subCategoryId = categoriesIds[i]
+
+            await client.storiesCategories.create({
+                data: {
+                    storyId,
+                    subCategoryId,
+                },
+            })
+        }
+    },
+
+    async insertStoryGenres(storyId: number, genresId: number[]) {
+        for (let i = 0; i < genresId.length; i++) {
+            const genreId = genresId[i]
+
+            await client.storiesGenres.create({
+                data: {
+                    storyId,
+                    genreId,
+                },
+            })
+        }
+    },
+
+    async insertStoryWarnings(storyId: number, warningsId: number[]) {
+        for (let i = 0; i < warningsId.length; i++) {
+            const warningId = warningsId[i]
+
+            await client.storiesWarnings.create({
+                data: {
+                    storyId,
+                    warningId,
+                },
+            })
+        }
+    },
+
+    async checkIfTagExists(name: string) {
+        const tag = await client.tags.findFirst({
+            where: { name },
+        })
+
+        return tag
+    },
+
+    async createTag(name: string) {
+        const tag = await client.tags.create({
+            data: { name },
+        })
+
+        return tag
+    },
+
+    async insertStoryTags(storyId: number, tagId: number) {
+        await client.storiesTags.create({
+            data: {
+                storyId,
+                tagId,
+            },
+        })
+    },
+
     async getRecentStories(page: number) {
         const skipAmount = (page - 1) * 10
 
@@ -36,7 +100,7 @@ export const storiesRepository = {
                 isFinished: true,
                 bannerURL: true,
                 language: { select: { name: true } },
-                storiesCategories: { select: { category: true } },
+                storiesCategories: { select: { subCategory: true } },
                 storiesGenres: { select: { genre: true } },
                 storiesTags: { select: { tag: true } },
                 storiesWarnings: { select: { warning: true } },
@@ -63,7 +127,7 @@ export const storiesRepository = {
                 isFinished: true,
                 bannerURL: true,
                 language: { select: { name: true } },
-                storiesCategories: { select: { category: true } },
+                storiesCategories: { select: { subCategory: true } },
                 storiesGenres: { select: { genre: true } },
                 storiesTags: { select: { tag: true } },
                 storiesWarnings: { select: { warning: true } },
@@ -95,7 +159,7 @@ export const storiesRepository = {
                 isFinished: true,
                 bannerURL: true,
                 language: { select: { name: true } },
-                storiesCategories: { select: { category: true } },
+                storiesCategories: { select: { subCategory: true } },
                 storiesGenres: { select: { genre: true } },
                 storiesTags: { select: { tag: true } },
                 storiesWarnings: { select: { warning: true } },
