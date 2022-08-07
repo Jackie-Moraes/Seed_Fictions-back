@@ -173,4 +173,11 @@ export const storiesRepository = {
 
         return story
     },
+
+    async increaseStoryViews(storyId: number) {
+        await client.stories.update({
+            where: { id: storyId },
+            data: { views: { increment: 1 } },
+        })
+    },
 }

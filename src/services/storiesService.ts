@@ -64,6 +64,7 @@ export const storiesService = {
     },
 
     async getStoryById(storyId: number) {
+        await storiesRepository.increaseStoryViews(storyId)
         const story = await storiesRepository.getStoryById(storyId)
         return story
     },
