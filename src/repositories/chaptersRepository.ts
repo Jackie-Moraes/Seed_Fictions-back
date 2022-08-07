@@ -47,7 +47,16 @@ export const chaptersRepository = {
                 content: true,
                 startingNotes: true,
                 endingNotes: true,
-                comments: true,
+                comments: {
+                    select: {
+                        id: true,
+                        content: true,
+                        createdAt: true,
+                        user: {
+                            select: { id: true, name: true, pictureURL: true },
+                        },
+                    },
+                },
             },
         })
 
