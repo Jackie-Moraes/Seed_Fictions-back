@@ -48,6 +48,8 @@ export const storiesService = {
                 await insertTagToStory(storyId, exists.id)
             }
         }
+
+        return storyId
     },
 
     async getRecentStories(page: number) {

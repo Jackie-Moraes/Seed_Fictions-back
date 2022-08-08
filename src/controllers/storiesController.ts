@@ -6,8 +6,8 @@ export const storiesController = {
     async createNewStory(req: Request, res: Response) {
         const { userId } = res.locals
 
-        await storiesService.createNewStory(req.body, userId)
-        return res.sendStatus(201)
+        const storyId = await storiesService.createNewStory(req.body, userId)
+        return res.status(201).send(storyId)
     },
 
     async getRecentStories(req: Request, res: Response) {
