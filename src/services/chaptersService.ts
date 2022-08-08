@@ -19,7 +19,8 @@ export const chaptersService = {
 
         await checkIfStoryBelongsToUser(userId, storyId)
         await checkIfChapterNameIsDuplicate(chapter.name, storyId)
-        await createChapter(chapter, storyId)
+        const chapterId = await createChapter(chapter, storyId)
+        return chapterId
     },
 
     async getAllChapters(storyId: number) {

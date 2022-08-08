@@ -18,7 +18,7 @@ export const chaptersRepository = {
     },
 
     async createChapter(chapter: createChapter, storyId: number) {
-        await client.chapters.create({
+        const chapterInfo = await client.chapters.create({
             data: {
                 name: chapter.name,
                 content: chapter.content,
@@ -27,6 +27,7 @@ export const chaptersRepository = {
                 storyId,
             },
         })
+        return chapterInfo.id
     },
 
     async returnAllChapters(storyId: number) {
