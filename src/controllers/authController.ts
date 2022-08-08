@@ -12,4 +12,13 @@ export const authController = {
         const token = await authService.userSignIn(req.body)
         return res.status(200).send({ token })
     },
+
+    async userData(req: Request, res: Response) {
+        const { userId } = res.locals
+
+        const user = await authService.userData(userId)
+
+        if (!user) return res.sendStatus(404)
+        return res.status(200).send(user)
+    },
 }

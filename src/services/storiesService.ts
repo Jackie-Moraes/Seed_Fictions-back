@@ -41,7 +41,7 @@ export const storiesService = {
 
                 if (!exists) {
                     const tagInfo = await createTag(tag)
-                    exists = true
+                    exists = {}
                     exists.id = tagInfo.id
                 }
 

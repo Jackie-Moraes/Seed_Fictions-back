@@ -47,4 +47,13 @@ export const authRepository = {
         })
         return exists
     },
+
+    async userData(userId: number) {
+        const user = await client.users.findFirst({
+            where: { id: userId },
+            select: { id: true, name: true, pictureURL: true },
+        })
+
+        return user
+    },
 }
