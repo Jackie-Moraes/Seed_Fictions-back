@@ -7,12 +7,12 @@ export const chaptersController = {
         const { userId } = res.locals
         const storyId = parseInt(req.params.storyId)
 
-        const chapterID = await chaptersService.createNewChapter(
+        const chapterId = await chaptersService.createNewChapter(
             req.body,
             userId,
             storyId
         )
-        return res.status(201).send({ chapterID })
+        return res.status(201).send({ chapterId })
     },
 
     async getAllChapters(req: Request, res: Response) {
