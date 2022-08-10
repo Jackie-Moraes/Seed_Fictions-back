@@ -8,6 +8,8 @@
         "seed": "ts-node prisma/seed.ts"
     },
     "scripts": {
+        "build": "tsc",
+        "start": "node dist/src/server.js",
         "dev": "nodemon src/server.ts",
         "test": "cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --coverage",
         "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- --testPathPattern=tests/unitary -i --coverage"
