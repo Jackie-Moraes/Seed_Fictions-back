@@ -180,4 +180,11 @@ export const storiesRepository = {
             data: { views: { increment: 1 } },
         })
     },
+
+    async updateStoryFinished(storyId: number, value: boolean) {
+        await client.stories.update({
+            where: { id: storyId },
+            data: { isFinished: value },
+        })
+    },
 }

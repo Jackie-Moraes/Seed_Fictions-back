@@ -20,5 +20,6 @@ storiesRouter.get(
     "/search/stories/:searchName",
     storiesController.getStoriesByName
 )
+storiesRouter.put("/stories/:storyId", validateToken)
 
 export default storiesRouter

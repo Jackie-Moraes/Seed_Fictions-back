@@ -39,4 +39,11 @@ export const storiesController = {
         const story = await storiesService.getStoryById(storyId)
         return res.status(200).send(story)
     },
+
+    async updateStory(req: Request, res: Response) {
+        const storyId = parseInt(req.params.storyId)
+
+        await storiesService.updateStory(storyId, req.body.value)
+        return res.sendStatus(200)
+    },
 }

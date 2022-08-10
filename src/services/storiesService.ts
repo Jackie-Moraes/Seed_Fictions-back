@@ -70,4 +70,8 @@ export const storiesService = {
         const story = await storiesRepository.getStoryById(storyId)
         return story
     },
+
+    async updateStory(storyId: number, value: boolean) {
+        await storiesRepository.updateStoryFinished(storyId, value)
+    },
 }

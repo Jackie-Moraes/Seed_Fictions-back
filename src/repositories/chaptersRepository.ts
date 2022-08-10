@@ -57,6 +57,7 @@ export const chaptersRepository = {
                             select: { id: true, name: true, pictureURL: true },
                         },
                     },
+                    orderBy: { createdAt: "desc" },
                 },
             },
         })
